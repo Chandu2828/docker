@@ -23,6 +23,10 @@ data "aws_ami" "joindevops" {
   }
 }
 
+data "http" "my_public_ip" {
+    url = "https://ipv4.icanhazip.com"
+}
+
 output  "ami_id" {
   value       = data.aws_ami.joindevops.id
 }
