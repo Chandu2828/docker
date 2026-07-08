@@ -7,7 +7,7 @@ terraform {
     }
 
     backend "s3" {
-        bucket          = "remote-state-90s-pratice-dev"
+        bucket          = "remote-state-90s-practice-dev"
         key             = "docker.tfstate"
         region          = "us-east-1"
         encrypt         = true 
