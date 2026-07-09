@@ -1,8 +1,13 @@
 #!/bin/bash
 
 growpart /dev/nvme0n1 ${partition_number}
-lvextend -r -L +{extend_size}G /dev/mapper/RootVG-varVol
+lvextend -r -L +${extend_size}G /dev/mapper/RootVG-varVol
 xfs_growfs /var 
+
+# Manual Way to extend
+# growpart /dev/nvme0n1 4
+# lvextend -r -L +30G /dev/mapper/RootVG-varVol
+# xfs_growfs /var
 
 dnf -y install dnf-plungins-core
 dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
