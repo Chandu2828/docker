@@ -1,6 +1,7 @@
 #!/bin/bash
 
 growpart /dev/nvme0n1 ${partition_number}
+pvresize /dev/nvme0n1p${partition_number}
 lvextend -r -L +${extend_size}G /dev/mapper/RootVG-varVol
 xfs_growfs /var 
 
