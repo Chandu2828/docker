@@ -6,6 +6,8 @@ resource "aws_instance" "docker" {
         partition_number = 4
         extend_size = 30 
     })
+    # Terraform will create the storage for us dynamically and also 
+    # Terraform will delete the storage dynamically when we run terraform destroy
     root_block_device {
         volume_size = 50 # Size of the volume in GiB
         volume_type = "gp3" # General Purpose SSD (gp3 is recommended)

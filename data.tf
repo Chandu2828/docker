@@ -14,7 +14,7 @@ data "aws_ami" "joindevops" {
 
   filter {
     name   = "virtualization-type"
-    values = ["hvm"]
+    values = ["hvm"] # hardware virtual Machine 
   }
 
   filter {
@@ -23,6 +23,7 @@ data "aws_ami" "joindevops" {
   }
 }
 
+# returns a user's public ipv4 address in plain text
 data "http" "my_public_ip" {
     url = "https://ipv4.icanhazip.com"
 }
