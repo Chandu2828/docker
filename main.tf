@@ -6,6 +6,8 @@ resource "aws_instance" "docker" {
         partition_number = 4
         extend_size = 30 
     })
+    # ${path.module} is a built-in filesystem variable which represents the exact path of the directory where
+    # your current terraform configuration file .tf lives
     # Terraform will create the storage for us dynamically and also 
     # Terraform will delete the storage dynamically when we run terraform destroy
     root_block_device {
