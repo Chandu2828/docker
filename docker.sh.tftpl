@@ -1,8 +1,8 @@
 #!/bin/bash
 
-growpart /dev/nvme0n1 ${partition_number}
-pvresize /dev/nvme0n1p${partition_number}
-lvextend -r -L +${extend_size}G /dev/mapper/RootVG-varVol
+growpart /dev/nvme0n1 ${partition_number} # Expands the raw physical partition size inside the partition table
+pvresize /dev/nvme0n1p${partition_number} # Informs the Logical Volume Manager (LVM) that the underlying physical container has grown.
+lvextend -r -L +${extend_size}G /dev/mapper/RootVG-varVol # Increases the size of the Logical Volume (LV) and attempts a file system expansion. 
 xfs_growfs /var 
 
 # Manual Way to extend
@@ -14,6 +14,6 @@ dnf -y install dnf-plungins-core
 dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
 dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 
-systemctl start docker
-systemctl enable docker
+systemctl start docker # It doesn't survive a reboot 
+systemctl enable docker # It creates a symlink so systemd launches it on startup, but it does not start Docker right now.
 usermod -aG docker ec2-user 
